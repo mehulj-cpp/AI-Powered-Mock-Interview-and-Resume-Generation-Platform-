@@ -1,21 +1,28 @@
-import React, { useState, useRef } from 'react'
-import "../style/home.scss"
+import React, { useEffect, useRef, useState } from 'react'
+import "../style/home.css"
 import { useInterview } from '../hooks/useInterview.js'
 import { useNavigate } from 'react-router'
 
 const Home = () => {
 
-    const { loading, generateReport,reports } = useInterview()
+    const { loading, generateReport, reports, getReports } = useInterview()
     const [ jobDescription, setJobDescription ] = useState("")
     const [ selfDescription, setSelfDescription ] = useState("")
     const resumeInputRef = useRef()
 
     const navigate = useNavigate()
 
+    useEffect(() => {
+        void getReports()
+    }, [ getReports ])
+
     const handleGenerateReport = async () => {
         const resumeFile = resumeInputRef.current.files[ 0 ]
         const data = await generateReport({ jobDescription, selfDescription, resumeFile })
-        navigate(`/interview/${data._id}`)
+
+        if (data?._id) {
+            navigate(`/interview/${data._id}`)
+        }
     }
 
     if (loading) {

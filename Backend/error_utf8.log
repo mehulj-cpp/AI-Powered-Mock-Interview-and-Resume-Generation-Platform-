@@ -1,0 +1,48 @@
+﻿node : file:///D:/New
+%20folder/WebDev/inte
+rview-ai-yt/Backend/s
+rc/controllers/interv
+iew.controller.js:1
+At line:1 char:1
++ node server.js > 
+error.log 2>&1
++ ~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~
+    + CategoryInfo   
+           : NotSpe  
+  cified: (file://   
+ /D:/New%...contr    
+oller.js:1:Strin    
+g) [], RemoteExc    
+eption
+    + FullyQualified 
+   ErrorId : Native  
+  CommandError
+ 
+import pdfParse from 
+"pdf-parse";
+       ^^^^^^^^
+SyntaxError: The 
+requested module 
+'pdf-parse' does not 
+provide an export 
+named 'default'
+    at ModuleJob._ins
+tantiate (node:intern
+al/modules/esm/module
+_job:182:21)
+    at async 
+ModuleJob.run (node:i
+nternal/modules/esm/m
+odule_job:266:5)
+    at async onImport
+.tracePromise.__proto
+__ (node:internal/mod
+ules/esm/loader:644:2
+6)
+    at async asyncRun
+EntryPointWithESMLoad
+er (node:internal/mod
+ules/run_main:116:5)
+
+Node.js v22.15.0
