@@ -8,7 +8,6 @@ const ai = new GoogleGenAI({
 });
 
 const interviewReportSchema = z.object({
-    matchScore: z.number().describe("A score between 0 and 100 indicating how well the candidate's profile matches the job describe"),
     technicalQuestions: z.array(z.object({
         question: z.string().describe("The technical question which can be asked in the interview"),
         intention: z.string().describe("The intention of interviewer behind asking this question"),
@@ -23,6 +22,7 @@ const interviewReportSchema = z.object({
         skill: z.string().describe("The skill which the candidate is lacking"),
         severity: z.enum(["low", "medium", "high"]).describe("The severity of this skill gap, i.e. how important is this skill for the job and how much it can impact the candidate's chances")
     })).describe("List of skill gaps in the candidate's profile along with their severity"),
+    matchScore: z.number().int().min(0).max(100).describe("An integer from 0 to 100 representing how well THIS candidate's profile fits THIS specific job. Compute it from the concrete overlap between the candidate's resume/self-description and the required skills, experience and seniority in the job description, then lower it based on the number and severity of the skillGaps above (high-severity gaps reduce it the most). Use the full 0-100 range and return a precise, honest score - low for a weak fit, high for a strong fit. Do NOT default to 75 or any other round number."),
     preparationPlan: z.array(z.object({
         day: z.number().describe("The day number in the preparation plan, starting from 1"),
         focus: z.string().describe("The main focus of this day in the preparation plan, e.g. data structures, system design, mock interviews etc."),
@@ -38,7 +38,9 @@ async function generateInterviewReport({ resume, selfDescription, jobDescription
                         Self Description: ${selfDescription}
                         Job Description: ${jobDescription}
 
-                        Generate exactly 10 technical questions and exactly 10 behavioral questions. For each question include the question itself, the interviewer's intention behind asking it, and how to answer it. Do not return fewer than 10 questions in either category.`;
+                        Generate exactly 10 technical questions and exactly 10 behavioral questions. For each question include the question itself, the interviewer's intention behind asking it, and how to answer it. Do not return fewer than 10 questions in either category.
+
+                        For matchScore, genuinely evaluate how well THIS candidate fits THIS job: compare the skills, years of experience and seniority the job description requires against what the resume/self-description actually demonstrates, and factor in the skill gaps you identified (more and higher-severity gaps mean a lower score). Return a precise integer from 0 to 100 using the full range - be critical and honest, giving a low score for a weak match and a high score for a strong one. Do not default to 75 or any other round number; the score must reflect this specific candidate-job pair.`;
 
     const response = await ai.models.generateContent({
         model: "gemini-3.1-flash-lite",
