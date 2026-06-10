@@ -25,7 +25,8 @@ const Login = () => {
     return (
         <main>
             <div className="form-container">
-                <h1>Login</h1>
+                <h1>Welcome back</h1>
+                <p className="form-subtitle">Sign in to continue building your interview strategy.</p>
                 <form onSubmit={handleSubmit}>
                     <div className="input-group">
                         <label htmlFor="email">Email</label>
