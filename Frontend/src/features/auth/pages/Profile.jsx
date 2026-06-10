@@ -47,9 +47,10 @@ const Profile = () => {
             {/* Account header */}
             <header className='profile-header'>
                 <div className='profile-id'>
-                    <div className='profile-avatar'>{getInitials(user?.username)}</div>
+                    <div className='profile-avatar'>{getInitials(user?.name || user?.username)}</div>
                     <div className='profile-id__text'>
-                        <h1>{user?.username || 'Your Profile'}</h1>
+                        <h1>Welcome, {user?.name || user?.username || 'there'}</h1>
+                        <p className='profile-username'>@{user?.username}</p>
                         <p className='profile-email'>{user?.email}</p>
                     </div>
                 </div>

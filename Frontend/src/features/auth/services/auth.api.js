@@ -5,9 +5,9 @@ const api = axios.create({
     withCredentials: true   // to send cookies
 })
 
-export async function register({ username, email, password }) {
+export async function register({ name, username, email, password }) {
     const response = await api.post('/api/auth/register', {
-        username, email, password
+        name, username, email, password
     })
     return response.data
 }

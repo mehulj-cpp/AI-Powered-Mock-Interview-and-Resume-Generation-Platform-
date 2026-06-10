@@ -52,9 +52,15 @@
   color: var(--text);
   margin: 0;
 }
+.profile-username {
+  margin: 0.2rem 0 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-strong);
+}
 .profile-email {
-  margin: 0.15rem 0 0;
-  font-size: 0.9rem;
+  margin: 0.1rem 0 0;
+  font-size: 0.8rem;
   color: var(--text-muted);
 }
 

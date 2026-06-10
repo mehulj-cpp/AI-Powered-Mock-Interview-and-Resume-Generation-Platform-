@@ -9,11 +9,11 @@ import tokenBlacklistModel from "../models/blacklist.model.js";
  * @access Public
  */
 async function registerUserController(req, res) {
-    const { username, email, password } = req.body;
+    const { name, username, email, password } = req.body;
 
-    if (!username || !email || !password) {
+    if (!name || !username || !email || !password) {
         return res.status(400).json({
-            message: "Please provide username, email and password"
+            message: "Please provide name, username, email and password"
         });
     }
 
@@ -30,6 +30,7 @@ async function registerUserController(req, res) {
     const hash = await bcrypt.hash(password, 10);
 
     const user = await userModel.create({
+        name,
         username,
         email,
         password: hash
@@ -52,6 +53,7 @@ async function registerUserController(req, res) {
         message: "User registered successfully",
         user: {
             id: user._id,
+            name: user.name,
             username: user.username,
             email: user.email
         }
@@ -98,6 +100,7 @@ async function loginUserController(req, res) {
         message: "User loggedIn successfully.",
         user: {
             id: user._id,
+            name: user.name,
             username: user.username,
             email: user.email
         }
@@ -143,6 +146,7 @@ async function getMeController(req, res) {
         message: "User details fetched successfully",
         user: {
             id: user._id,
+            name: user.name,
             username: user.username,
             email: user.email
         }

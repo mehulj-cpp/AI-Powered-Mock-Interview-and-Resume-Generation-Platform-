@@ -6,16 +6,23 @@ import { useAuth } from '../hooks/useAuth'
 const Register = () => {
 
     const navigate = useNavigate()
+    const [ name, setName ] = useState("")
     const [ username, setUsername ] = useState("")
     const [ email, setEmail ] = useState("")
     const [ password, setPassword ] = useState("")
+    const [ error, setError ] = useState("")
 
     const {loading,handleRegister} = useAuth()
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await handleRegister({username,email,password})
-        navigate("/")
+        setError("")
+        try {
+            await handleRegister({ name, username, email, password })
+            navigate("/")
+        } catch (err) {
+            setError(err?.response?.data?.message || "Unable to create account. Please try again.")
+        }
     }
 
     if(loading){
@@ -30,6 +37,12 @@ const Register = () => {
 
                 <form onSubmit={handleSubmit}>
 
+                    <div className="input-group">
+                        <label htmlFor="name">Name</label>
+                        <input
+                            onChange={(e) => { setName(e.target.value) }}
+                            type="text" id="name" name='name' placeholder='Enter your name' />
+                    </div>
                     <div className="input-group">
                         <label htmlFor="username">Username</label>
                         <input
@@ -48,6 +61,8 @@ const Register = () => {
                             onChange={(e) => { setPassword(e.target.value) }}
                             type="password" id="password" name='password' placeholder='Enter password' />
                     </div>
+
+                    {error && <p className='auth-error'>{error}</p>}
 
                     <button className='button primary-button' >Register</button>
 

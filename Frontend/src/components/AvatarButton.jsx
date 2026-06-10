@@ -15,15 +15,16 @@ const getInitials = (name = "") => {
 
 const AvatarButton = () => {
   const { user } = useAuth()
+  const displayName = user?.name || user?.username
 
   return (
     <Link
       to="/profile"
       className="avatar-btn"
       aria-label="Open profile"
-      title={user?.username ? `${user.username} — open profile` : "Open profile"}
+      title={displayName ? `${displayName} — open profile` : "Open profile"}
     >
-      {getInitials(user?.username)}
+      {getInitials(displayName)}
     </Link>
   )
 }

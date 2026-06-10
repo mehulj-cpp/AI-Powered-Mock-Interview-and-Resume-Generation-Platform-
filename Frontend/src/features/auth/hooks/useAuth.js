@@ -13,20 +13,18 @@ export const useAuth = () => {
         try {
             const data = await login({ email, password })
             setUser(data.user)
-        } catch (err) {
-            console.error(err)
+            return data.user
         } finally {
             setLoading(false)
         }
     }
 
-    const handleRegister = async ({ username, email, password }) => {
+    const handleRegister = async ({ name, username, email, password }) => {
         setLoading(true)
         try {
-            const data = await register({ username, email, password })
+            const data = await register({ name, username, email, password })
             setUser(data.user)
-        } catch (err) {
-            console.error(err)
+            return data.user
         } finally {
             setLoading(false)
         }
