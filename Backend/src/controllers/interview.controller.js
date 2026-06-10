@@ -1,7 +1,4 @@
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const pdfParse = require("pdf-parse");
-
+import { PDFParse } from "pdf-parse";
 import { generateInterviewReport, generateResumePdf } from "../services/ai.service.js";
 import interviewReportModel from "../models/interviewReport.model.js";
 
@@ -9,19 +6,44 @@ import interviewReportModel from "../models/interviewReport.model.js";
  * @description Controller to generate interview report based on user self description, resume and job description.
  */
 async function generateInterViewReportController(req, res) {
-    const resumeContent = await pdfParse(req.file.buffer);
     const { selfDescription, jobDescription } = req.body;
 
+    if (!jobDescription || jobDescription.trim() === "") {
+        return res.status(400).json({
+            message: "Job description is required."
+        });
+    }
+
+    if (!req.file && (!selfDescription || selfDescription.trim() === "")) {
+        return res.status(400).json({
+            message: "Please upload a resume or provide a self description."
+        });
+    }
+
+    let resumeText = "";
+    if (req.file) {
+        try {
+            const parser = new PDFParse({ data: req.file.buffer });
+            const resumeContent = await parser.getText();
+            resumeText = resumeContent.text || "";
+        } catch (err) {
+            console.error("Error parsing PDF resume:", err);
+            return res.status(400).json({
+                message: "Failed to parse PDF resume. Please ensure the file is not corrupted and is in standard PDF format."
+            });
+        }
+    }
+
     const interViewReportByAi = await generateInterviewReport({
-        resume: resumeContent.text,
-        selfDescription,
+        resume: resumeText,
+        selfDescription: selfDescription || "",
         jobDescription
     });
 
     const interviewReport = await interviewReportModel.create({
         user: req.user.id,
-        resume: resumeContent.text,
-        selfDescription,
+        resume: resumeText,
+        selfDescription: selfDescription || "",
         jobDescription,
         ...interViewReportByAi
     });
@@ -90,4 +112,9 @@ async function generateResumePdfController(req, res) {
     res.send(pdfBuffer);
 }
 
-export { generateInterViewReportController, getInterviewReportByIdController, getAllInterviewReportsController, generateResumePdfController };
+export {
+    generateInterViewReportController,
+    getInterviewReportByIdController,
+    getAllInterviewReportsController,
+    generateResumePdfController
+};
