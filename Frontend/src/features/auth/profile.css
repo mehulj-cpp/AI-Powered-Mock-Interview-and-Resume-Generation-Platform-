@@ -1,0 +1,152 @@
+.profile-page {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 100vh;
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 3rem 1.5rem;
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+
+/* ---- Account header ---- */
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow);
+}
+.profile-id {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.profile-avatar {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-pill);
+  background: var(--gradient-accent);
+  color: var(--on-accent);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  box-shadow: var(--shadow-accent);
+}
+.profile-id__text h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+.profile-email {
+  margin: 0.15rem 0 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.profile-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.button.ghost-button {
+  gap: 0.45rem;
+  background-color: var(--surface-2);
+  border: 1px solid var(--border-hover);
+  color: var(--text);
+}
+.button.ghost-button:hover {
+  border-color: var(--accent);
+  color: var(--accent-strong);
+  transform: translateY(-2px);
+}
+.button.danger-button {
+  gap: 0.45rem;
+  background-color: color-mix(in srgb, var(--danger) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--danger) 35%, transparent);
+  color: var(--danger);
+}
+.button.danger-button:hover {
+  background-color: color-mix(in srgb, var(--danger) 20%, transparent);
+  transform: translateY(-2px);
+}
+
+/* ---- Stats ---- */
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1.25rem 1.5rem;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+}
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--accent-strong);
+  line-height: 1.1;
+}
+.stat-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-subtle);
+}
+
+/* ---- Reports ---- */
+.profile-page .recent-reports {
+  max-width: none;
+  gap: 1rem;
+}
+.profile-page .recent-reports h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.profile-page .reports-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.85rem;
+}
+.profile-page .reports-list .report-item {
+  flex: initial;
+}
+
+.profile-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 2rem;
+  background-color: var(--surface);
+  border: 1px dashed var(--border-hover);
+  border-radius: var(--r-lg);
+  color: var(--text-muted);
+}
+.profile-empty p {
+  margin: 0;
+  font-size: 0.95rem;
+}

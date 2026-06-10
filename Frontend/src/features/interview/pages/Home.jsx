@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import "../style/home.css"
 import { useInterview } from '../hooks/useInterview.js'
 import { useNavigate } from 'react-router'
+import AvatarButton from '../../../components/AvatarButton.jsx'
 
 const Home = () => {
 
@@ -73,6 +74,8 @@ const Home = () => {
 
     return (
         <div className='home-page'>
+
+            <AvatarButton />
 
             {/* Page Header */}
             <header className='page-header'>

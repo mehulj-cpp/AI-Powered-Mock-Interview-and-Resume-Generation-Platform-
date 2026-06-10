@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../style/interview.css'
 import { useInterview } from '../hooks/useInterview.js'
 import { useParams } from 'react-router'
+import AvatarButton from '../../../components/AvatarButton.jsx'
 
 
 
@@ -85,6 +86,9 @@ const Interview = () => {
 
     return (
         <div className='interview-page'>
+
+            <AvatarButton />
+
             <div className='interview-layout'>
 
                 {/* ── Left Nav ── */}
