@@ -17,7 +17,7 @@ const Login = () => {
         setError("")
         try {
             await handleLogin({ email, password })
-            navigate('/')
+            navigate('/dashboard')
         } catch (err) {
             setError(err?.response?.data?.message || "Unable to log in. Please try again.")
         }

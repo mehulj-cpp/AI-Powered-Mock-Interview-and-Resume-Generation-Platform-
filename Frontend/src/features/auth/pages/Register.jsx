@@ -19,7 +19,7 @@ const Register = () => {
         setError("")
         try {
             await handleRegister({ name, username, email, password })
-            navigate("/")
+            navigate("/dashboard")
         } catch (err) {
             setError(err?.response?.data?.message || "Unable to create account. Please try again.")
         }

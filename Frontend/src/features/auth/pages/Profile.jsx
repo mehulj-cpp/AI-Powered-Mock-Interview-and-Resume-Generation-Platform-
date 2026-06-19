@@ -55,7 +55,7 @@ const Profile = () => {
                     </div>
                 </div>
                 <div className='profile-actions'>
-                    <button className='button ghost-button' onClick={() => navigate('/')}>
+                    <button className='button ghost-button' onClick={() => navigate('/dashboard')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
                         New plan
                     </button>
@@ -84,7 +84,7 @@ const Profile = () => {
                 {reports.length === 0 ? (
                     <div className='profile-empty'>
                         <p>You haven't generated any interview plans yet.</p>
-                        <button className='button primary-button' onClick={() => navigate('/')}>
+                        <button className='button primary-button' onClick={() => navigate('/dashboard')}>
                             Create your first plan
                         </button>
                     </div>

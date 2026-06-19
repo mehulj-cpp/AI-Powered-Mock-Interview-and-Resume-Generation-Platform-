@@ -1,0 +1,165 @@
+/* ============================================================
+   Landing — public entry page (PrepWise)
+   Hero welcome statement + a huge interactive start button.
+   Consumes the design tokens from src/style.css.
+   ============================================================ */
+
+.landing {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2rem, 6vw, 5rem) 1.25rem;
+}
+
+.landing__hero {
+  width: 100%;
+  max-width: 920px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ---- Eyebrow ---- */
+.landing__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--r-pill);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  color: var(--accent-strong);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.landing__eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px 1px var(--accent-glow);
+}
+
+/* ---- Welcome statement ---- */
+.landing__title {
+  margin-top: 1.5rem;
+  font-size: clamp(2.4rem, 6vw, 4.25rem);
+  font-weight: 700;
+  line-height: 1.05;
+  max-width: 16ch;
+}
+
+.landing__subtitle {
+  margin-top: 1.25rem;
+  max-width: 56ch;
+  color: var(--text-muted);
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   Huge interactive start button
+   ============================================================ */
+.start-btn {
+  position: relative;
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.4rem, 2.5vw, 1.9rem) clamp(2.6rem, 5vw, 3.6rem);
+  border: none;
+  border-radius: var(--r-pill);
+  background: var(--gradient-accent);
+  color: var(--on-accent);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow: var(--shadow-accent);
+  transition: transform var(--t), box-shadow var(--t), filter var(--t);
+}
+
+.start-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+}
+.start-btn:active {
+  transform: scale(0.98);
+}
+
+.start-btn__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+/* ---- Returning-user link ---- */
+.landing__signin {
+  margin-top: 1.5rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* ============================================================
+   Feature strip
+   ============================================================ */
+.landing__features {
+  list-style: none;
+  margin-top: clamp(3rem, 7vw, 4.5rem);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.landing__feature {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  text-align: left;
+  padding: 1.1rem 1.2rem;
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: transform var(--t), border-color var(--t), box-shadow var(--t);
+}
+.landing__feature:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow);
+}
+.landing__feature-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  color: var(--accent-strong);
+}
+.landing__feature h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+.landing__feature p {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 720px) {
+  .landing__features {
+    grid-template-columns: 1fr;
+  }
+}
